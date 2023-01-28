@@ -14,9 +14,6 @@ model="text-davinci-003" # most capable, highest cost
 #model="text-babbage-001"
 #model="text-ada-001" # lowest cost
 
-# Get the query from user input:
-prompt=input("Prompt me like you mean it, you rotten human! : ")
-
 # Get the temperature from user input:
 temperror="Error: Temperature must be a number between 0 and 1 - eg 0.5"
 temp_prompt=input("What temperature? -Choose between 0 and 1 - Leave blank for 0.5 : ")
@@ -36,7 +33,10 @@ elif float(temp_prompt)>1:
         sys.exit(temperror)
 else: temp=float(temp_prompt)
 
-# ChatGPT API call:
+# Get the query from user input:
+prompt=input("---------\nPrompt me like you mean it, you rotten human!\n     : ")
+
+# ChatGPT API function:
 def chatGPT(prompt):
         response = openai.Completion.create(
                 model=model,
@@ -48,6 +48,6 @@ def chatGPT(prompt):
 
 # Prints the output:
 (res, usage) = chatGPT(prompt)
-print(res)
-print("\n----------------\nTokens used: "+str(usage))
+print("---------\n"+res)
+print("---------\nTokens used: "+str(usage))
 print("Temperature: "+str(temp))
