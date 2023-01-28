@@ -20,7 +20,7 @@ formatting2="\n-------------------\n"
 formatting3="\n-------------------"
 
 # Get the temperature from user input:
-temp_prompt=input(formatting+"What temperature? -Choose between 0 and 1 - Leave blank for 0.5 : ")
+temp_prompt=input(formatting+"What temperature? -Choose between 0 and 1 - Leave blank for 0.5\n\t : ")
 # Function to test if the users input for temperature is a usable number:
 def convertable_to_float(user_temp_input):
     try:
@@ -40,7 +40,7 @@ elif convertable_to_float(temp_prompt)==False or float(temp_prompt)<0 or float(t
 else: temp=float(temp_prompt)
 
 # Get the ChatGPT prompt from user input:
-prompt=input(formatting+"Prompt me like you mean it, you rotten human!\n     : ")
+prompt=input(formatting+"Prompt me like you mean it, you rotten human!\n\t : ")
 
 # Define the ChatGPT API function:
 def chatGPT(prompt):
@@ -54,4 +54,4 @@ def chatGPT(prompt):
 
 # Returns the ChatGPT response to the user:
 (res, usage) = chatGPT(prompt)
-print(formatting+res+formatting2+"Tokens used: "+str(usage)+"\nTemperature: "+str(temp)+formatting3)
+print(formatting+"Response\n\t : "+res+formatting2+"Tokens used: "+str(usage)+"\nTemperature: "+str(temp)+formatting3)
