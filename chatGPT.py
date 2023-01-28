@@ -15,28 +15,28 @@ model="text-davinci-003" # most capable, highest cost
 #model="text-ada-001" # lowest cost
 
 # Get the temperature from user input:
-temperror="Error: Temperature must be a number between 0 and 1 - eg 0.5"
 temp_prompt=input("What temperature? -Choose between 0 and 1 - Leave blank for 0.5 : ")
+# Temperature error handling...
+# Function to test if the users input for temperature is a usable number:
 def convertable_to_float(user_temp_input):
     try:
         result = float(user_temp_input)
         return True
     except ValueError:
         return False
-if temp_prompt=="":
+temperror="Error: Temperature must be a number between 0 and 1 - eg 0.5"
+if convertable_to_float(temp_prompt)==False or float(temp_prompt)<0 or float(temp_prompt)>1:
+        sys.exit(temperror)
+# If user's input is blank, use a temperature of 0.5:
+elif temp_prompt=="":
         temp=0.5
-elif convertable_to_float(temp_prompt)==False:
-        sys.exit(temperror)
-elif float(temp_prompt)<0:
-        sys.exit(temperror)
-elif float(temp_prompt)>1:
-        sys.exit(temperror)
+# Set temperature from users's selection:
 else: temp=float(temp_prompt)
 
-# Get the query from user input:
-prompt=input("---------\nPrompt me like you mean it, you rotten human!\n     : ")
+# Get the ChatGPT prompt from user input:
+prompt=input("-------------------\nPrompt me like you mean it, you rotten human!\n     : ")
 
-# ChatGPT API function:
+# Define the ChatGPT API function:
 def chatGPT(prompt):
         response = openai.Completion.create(
                 model=model,
@@ -46,8 +46,8 @@ def chatGPT(prompt):
                 )
         return str.strip(response['choices'][0]['text']), response['usage']['total_tokens']
 
-# Prints the output:
+# Returns the ChatGPT response to the user:
 (res, usage) = chatGPT(prompt)
-print("---------\n"+res)
-print("---------\nTokens used: "+str(usage))
+print("-------------------\n"+res)
+print("-------------------\nTokens used: "+str(usage))
 print("Temperature: "+str(temp))
