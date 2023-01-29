@@ -66,6 +66,3 @@ def chatGPT(prompt):
 # Returns the ChatGPT response to the user
 (res, usage) = chatGPT(prompt)
 print(formatting+"Response\n\t : "+res+formatting2+"Tokens used: "+str(usage)+"\nTemperature: "+str(temp)+formatting3)
-
-# OpenAI chatgpt api call
-def chatgpt_api_call ():
